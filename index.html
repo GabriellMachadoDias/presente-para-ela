@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I Love You</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #fff0f5;
+      overflow: hidden;
+    }
+
+    .center-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 80vh;
+      width: 100%;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #d63384;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .key-button {
+      width: 100px;
+      height: 100px;
+      background: #f5f5f5;
+      border-radius: 12px;
+      box-shadow: 0 4px 0 #d1d1d1, 0 8px 16px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .key-button:active {
+      transform: translateY(4px);
+      box-shadow: 0 0 0 #d1d1d1, 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .key-button span {
+      font-size: 2.5rem;
+      color: #e83e8c;
+    }
+
+    .frase {
+      position: absolute;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: #ff69b4;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 12px;
+      animation: fadeOut 2.5s ease forwards;
+      pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      10% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+        margin-bottom: 14px;
+      }
+
+      .key-button {
+        width: 80px;
+        height: 80px;
+      }
+
+      .key-button span {
+        font-size: 2rem;
+      }
+
+      .frase {
+        font-size: 1rem;
+        padding: 8px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="center-box">
+    <h1>I love You</h1>
+    <div class="key-button" id="btn">
+      <span>❤</span>
+    </div>
+  </div>
+
+  <script>
+    const frases = [
+      "Eu te amo!",
+      "Você é meu mundo.",
+      "Meu coração é seu.",
+      "Tudo é melhor com você.",
+      "Te quero pra sempre.",
+      "Você é minha paz.",
+      "Cada detalhe seu me encanta.",
+      "Você é meu lar.",
+      "Te amo mais a cada dia.",
+      "Amar você é fácil."
+    ];
+
+    const btn = document.getElementById('btn');
+
+    btn.addEventListener('click', () => {
+      const frase = document.createElement('div');
+      frase.classList.add('frase');
+      frase.innerText = frases[Math.floor(Math.random() * frases.length)];
+
+      const x = Math.random() * (window.innerWidth - 160);
+      const y = Math.random() * (window.innerHeight - 120);
+      frase.style.left = `${x}px`;
+      frase.style.top = `${y}px`;
+
+      document.body.appendChild(frase);
+
+      setTimeout(() => {
+        frase.remove();
+      }, 2500);
+    });
+  </script>
+</body>
+</html>
