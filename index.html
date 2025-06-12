@@ -13,8 +13,21 @@
     }
 
     body {
-      background: #fff0f5;
-      overflow: hidden;
+      background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      top: 0;
+      left: 0;
     }
 
     .center-box {
@@ -23,46 +36,49 @@
       align-items: center;
       justify-content: center;
       height: 80vh;
-      width: 100%;
-      padding: 0 20px;
       text-align: center;
+      z-index: 2;
+      position: relative;
     }
 
     h1 {
       font-size: 3rem;
-      color: #d63384;
-      margin-bottom: 20px;
-      animation: fadeIn 1s ease-out;
+      color: #c2185b;
+      margin-bottom: 30px;
+      animation: fadeIn 1.2s ease-out;
+      text-shadow: 1px 1px 2px #fff;
     }
 
-    .key-button {
+    .key-button, .love-letter-button {
       width: 100px;
       height: 100px;
-      background: #f5f5f5;
-      border-radius: 12px;
-      box-shadow: 0 4px 0 #d1d1d1, 0 8px 16px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      margin: 10px;
+      border: 2px solid #f8bbd0;
     }
 
-    .key-button:active {
-      transform: translateY(4px);
-      box-shadow: 0 0 0 #d1d1d1, 0 2px 8px rgba(0, 0, 0, 0.1);
+    .key-button:hover, .love-letter-button:hover {
+      box-shadow: 0 8px 24px rgba(212, 0, 84, 0.4);
+      transform: scale(1.05);
     }
 
-    .key-button span {
+    .key-button span, .love-letter-button span {
       font-size: 2.5rem;
-      color: #e83e8c;
+      color: #d81b60;
     }
 
     .frase {
       position: absolute;
       font-size: 1.2rem;
       font-weight: bold;
-      background: #ff69b4;
+      background: #f06292;
       color: white;
       padding: 10px 16px;
       border-radius: 12px;
@@ -72,32 +88,49 @@
     }
 
     @keyframes fadeOut {
-      0% {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      10% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-        transform: scale(1.2);
-      }
+      0% { opacity: 0; transform: scale(0.8); }
+      10% { opacity: 1; transform: scale(1); }
+      90% { opacity: 1; }
+      100% { opacity: 0; transform: scale(1.2); }
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .love-letter {
+      max-width: 800px;
+      margin: 60px auto;
+      background: #fff5f8;
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+      color: #4a4a4a;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      position: relative;
+      border: 3px solid #f8bbd0;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .love-letter::before {
+      content: "💌";
+      font-size: 2.5rem;
+      position: absolute;
+      top: -20px;
+      left: 20px;
+    }
+
+    .love-letter h2 {
+      color: #c2185b;
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+
+    .hidden {
+      display: none;
     }
 
     @media (max-width: 600px) {
@@ -106,18 +139,22 @@
         margin-bottom: 14px;
       }
 
-      .key-button {
+      .key-button, .love-letter-button {
         width: 80px;
         height: 80px;
       }
 
-      .key-button span {
+      .key-button span, .love-letter-button span {
         font-size: 2rem;
       }
 
       .frase {
         font-size: 1rem;
         padding: 8px 12px;
+      }
+
+      .love-letter {
+        padding: 30px 20px;
       }
     }
   </style>
@@ -128,11 +165,33 @@
     <div class="key-button" id="btn">
       <span>❤</span>
     </div>
+    <div class="love-letter-button" onclick="mostrarCarta()">
+      <span>💌</span>
+    </div>
+  </div>
+
+  <div class="love-letter hidden" id="carta">
+    <h2>Feliz Dia dos Namorados, minha coelhinha</h2>
+    <p>Hoje é Dia dos Namorados, e eu agora posso falar do que sinto por você. De forma resumida, pelo menos tentar</p>
+    <p>Amor, você é a única que me faz sentir tudo ao mesmo tempo: amor, desejo, saudade, carinho, medo de perder, vontade de ficar... tudo de uma só vez.</p>
+    <p>Só de ouvir sua voz meu dia muda</p>
+    <p>Seu jeitinho me desmonta, me acalma, me deixa todo bobo — sem nem precisar tentar</p>
+    <p>Aos poucos, você foi se tornando tudo na minha vida, a ponto de ser difícil te tirar da cabeça</p>
+    <p>Você é amiga, parceira, amor, calmaria e às vezes tempestade (mas uma tempestade bunita hehe)</p>
+    <p>Simplesmente tudo o que faz meus dias valerem mais a pena, tudo que me faz ser mais feliz. E eu sou a pessoa mais feliz do mundo por ter você como namorada, e não me arrependo em momento algum disso</p>
+    <p>Eu te amo em cada detalhe seu...</p>
+    <p>Nos gestos, no jeito como fala, no jeito que me olha, no que demonstra e até no que tenta esconder</p>
+    <p>Me esforço e vou continuar me esforçando pra te fazer feliz, mesmo quando a gente estiver longe e tudo parecer pesado demais</p>
+    <p>Serei seu apoio quando precisar, seu amigo quando quiser conversar,</p>
+    <p>ou só alguém pra ficar ali em silêncio do seu lado quando tudo parecer demais</p>
+    <p>Mas saiba que uma coisa nunca vai mudar: eu te amo, e nunca, nunca vou desistir de você</p>
+    <p>Feliz Dia dos Namorados, minha coelhinha<br />Você, sem dúvida alguma, é o amor da minha vida</p>
+    <p style="text-align: right; margin-top: 30px;">Com todo o meu amor...💜🤍✨</p>
   </div>
 
   <script>
     const frases = [
-      "eu te amo!🤍",
+      "eu te amo!",
       "vc é meu mundo",
       "meu coração é seu",
       "tudo é melhor com você",
@@ -141,7 +200,7 @@
       "cada detalhe seu me encanta",
       "vc é meu lar",
       "te amo mais a cada dia",
-      "vc é irresistível 💜"
+      "vc é irresistível"
     ];
 
     const btn = document.getElementById('btn');
@@ -162,6 +221,11 @@
         frase.remove();
       }, 2500);
     });
+
+    function mostrarCarta() {
+      document.getElementById('carta').classList.remove('hidden');
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
   </script>
 </body>
 </html>
